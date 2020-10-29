@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+    <script>
+        window.onload = game();
+
+        function game(){
+            let n = 5;
+            let playerScore = 0;
+            let computerScore = 0;
+            for (i=0; i<n; i++) {
+                switch(playRound(playerPlay(), computerPlay())){
+                    case "playerWin": 
+                        playerScore += 1;
+                        console.log(`Current score: PLAYER(${playerScore}) - COMPUTER(${computerScore})`);
+                        break;
+                    case "computerWin": 
+                        computerScore += 1;
+                        console.log(`Current score: PLAYER(${playerScore}) - COMPUTER(${computerScore})`);
+                        break;
+                    case "draw": 
+                        break;
+                }
+                console.log(playerScore, computerScore);
+            }
+            console.log(`Final score: PLAYER(${playerScore}) - COMPUTER(${computerScore})`);
+            if (playerScore>computerScore){
+                console.log("Player wins after 5 games");
+            }
+            else if(computerScore>playerScore){
+                console.log("Computer wins after 5 games");
+            }
+            else{
+                console.log("It is a draw after 5 games");
+            }
+        }
+
+        function playRound(playerSelection, computerSelection){
+            if (playerSelection == "rock"){
+                switch(computerSelection){
+                    case "rock":
+                        console.log("It is a draw!");
+                        result = "draw";
+                        break;
+                    case "paper":
+                        console.log("Computer wins!");
+                        result = "computerWin"
+                        break;
+                    case "scissors":
+                        console.log("Player wins!")
+                        result="playerWin";
+                        break;
+                    default: 
+                        console.log("There was an error retrieving selections");
+                }
+                return result;
+            }
+            if (playerSelection == "scissors"){
+                switch(computerSelection){
+                    case "rock":
+                        console.log("Computer wins!");
+                        result = "computerWin";
+                        break;
+                    case "paper":
+                        console.log("Player wins!");
+                        result = "playerWin"
+                        break;
+                    case "scissors":
+                        console.log("It is a draw!")
+                        result="draw";
+                        break;
+                    default: 
+                        console.log("There was an error retrieving selections");
+                }
+                return result;
+            }
+            if (playerSelection == "paper"){
+                switch(computerSelection){
+                    case "rock":
+                        console.log("Player wins!");
+                        result = "playerWin";
+                        break;
+                    case "paper":
+                        console.log("It is a draw!");
+                        result = "draw"
+                        break;
+                    case "scissors":
+                        console.log("Computer wins!")
+                        result="computerWin";
+                        break;
+                    default: 
+                        console.log("There was an error retrieving selections");
+                }
+                return result;
+            }
+        }
+
+        function playerPlay() {
+            let playerSelection = prompt("Select rock, paper or scissors to play");
+            playerSelection = playerSelection.toLowerCase();
+            if (playerSelection === !("rock" || "scissors" || "paper")) {
+                console.log(playerSelection);
+                alert("You've made an invalid input");
+            }
+            else{
+                console.log("You've picked: ", playerSelection);
+                return playerSelection;
+            }
+        }
+
+        function computerPlay() {
+            let randomNum = Math.floor(Math.random()*3 + 1);
+            let computerSelection;
+            if (randomNum === 1){
+                computerSelection = "rock";
+            }
+            else if (randomNum === 2){
+                computerSelection = "paper";
+            }
+            else{
+                computerSelection = "scissors"
+            }
+            console.log("Computer picks: ", computerSelection);
+            return computerSelection;
+        }
+    </script>
+</body>
+</html>
